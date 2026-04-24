@@ -11,6 +11,6 @@ export default `<!doctype html>
 
 <body ngcm="">
   <app-root></app-root>
-<script src="main-ET3XZ5XV-shopfix.js" type="module"></script></body>
+<script src="main-73QCRTP6.js" type="module"></script></body>
 
 </html>`;
