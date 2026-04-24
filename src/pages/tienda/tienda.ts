@@ -76,14 +76,16 @@ export class Tienda implements OnInit {
 
   fetchProducts() {
     this.isLoading.set(true);
+    console.log(`[Tienda] Solicitando productos al backend: ${this.productsUrl}`);
     this.http.get<any[]>(this.productsUrl).subscribe({
       next: (data) => {
+        console.log(`[Tienda] Productos recibidos exitosamente:`, data);
         const reversed = [...data].reverse(); // Newest first
         this.productsList.set(reversed);
         this.isLoading.set(false);
       },
       error: (err) => {
-        console.error("Error obteniendo productos:", err);
+        console.error("[Tienda] Error obteniendo productos:", err);
         this.isLoading.set(false);
       }
     });

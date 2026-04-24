@@ -49,16 +49,21 @@ export class ProductoDetalle implements OnInit {
     }
 
     // We fetch all products and find the one. Ideally the backend would have /products/:id
+    console.log(`[DetalleProducto] Solicitando catálogo completo para encontrar el ID ${idParam} en: ${API_BASE_URL}/products/all`);
     this.http.get<any[]>(`${API_BASE_URL}/products/all`).subscribe({
       next: (data) => {
+        console.log(`[DetalleProducto] Catálogo recibido. Buscando producto...`);
         const found = data.find(p => p.id.toString() === idParam);
         if (found) {
+          console.log(`[DetalleProducto] Producto encontrado:`, found);
           this.product.set(found);
+        } else {
+          console.warn(`[DetalleProducto] Producto con ID ${idParam} no fue encontrado en la base de datos.`);
         }
         this.isLoading.set(false);
       },
       error: (err) => {
-        console.error("Error fetching product details", err);
+        console.error("[DetalleProducto] Error fetching product details", err);
         this.isLoading.set(false);
       }
     });
