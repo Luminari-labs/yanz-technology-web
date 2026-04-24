@@ -68,9 +68,6 @@ export class Tienda implements OnInit {
   });
 
   ngOnInit() {
-    if (!isPlatformBrowser(this.platformId)) {
-      return;
-    }
     this.fetchProducts();
   }
 

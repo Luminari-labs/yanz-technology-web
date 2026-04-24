@@ -24,10 +24,6 @@ export class ProductoDetalle implements OnInit {
   isLoading = signal<boolean>(true);
 
   ngOnInit() {
-    if (!isPlatformBrowser(this.platformId)) {
-      return;
-    }
-
     // Attempt to get product from navigation state (passed from Tienda)
     const navigation = this.router.getCurrentNavigation();
     const stateProduct = navigation?.extras.state?.['product'] || history.state?.product;
