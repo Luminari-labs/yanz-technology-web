@@ -8,21 +8,128 @@ import express from 'express';
 import { join } from 'node:path';
 
 const browserDistFolder = join(import.meta.dirname, '../browser');
+const backendBaseUrl =
+  process.env['BACKEND_URL'] ?? 'http://localhost:8080';
+const allowedHosts = getAllowedHosts();
+const shouldProxyRequestBody = (method: string) =>
+  method !== 'GET' && method !== 'HEAD';
 
 const app = express();
-const angularApp = new AngularNodeAppEngine();
+app.set('trust proxy', true);
+const angularApp = new AngularNodeAppEngine({ allowedHosts });
+
+function appendHostValue(hosts: Set<string>, value: string | undefined) {
+  if (!value) {
+    return;
+  }
+
+  for (const entry of value.split(',')) {
+    const trimmedEntry = entry.trim();
+    if (!trimmedEntry) {
+      continue;
+    }
+
+    try {
+      const parsedUrl = new URL(trimmedEntry);
+      if (parsedUrl.hostname) {
+        hosts.add(parsedUrl.hostname);
+      }
+      continue;
+    } catch {
+      // Not a full URL; treat it as a hostname or host:port entry.
+    }
+
+    const hostname = trimmedEntry
+      .replace(/^https?:\/\//i, '')
+      .replace(/\/.*$/, '')
+      .replace(/:\d+$/, '');
+
+    if (hostname) {
+      hosts.add(hostname);
+    }
+  }
+}
+
+function getAllowedHosts() {
+  const hosts = new Set<string>(['localhost', '127.0.0.1']);
+
+  appendHostValue(hosts, process.env['NG_ALLOWED_HOSTS']);
+  appendHostValue(hosts, process.env['ALLOWED_HOSTS']);
+  appendHostValue(hosts, process.env['APP_URL']);
+  appendHostValue(hosts, process.env['PUBLIC_URL']);
+  appendHostValue(hosts, process.env['SITE_URL']);
+
+  return [...hosts];
+}
 
 /**
- * Example Express Rest API endpoints can be defined here.
- * Uncomment and define endpoints as necessary.
- *
- * Example:
- * ```ts
- * app.get('/api/{*splat}', (req, res) => {
- *   // Handle API request
- * });
- * ```
+ * Proxy frontend `/api` requests to the real backend.
  */
+app.use('/api', async (req, res, next) => {
+  const targetUrl = new URL(req.originalUrl, backendBaseUrl);
+
+  try {
+    const headers = new Headers();
+
+    for (const [key, value] of Object.entries(req.headers)) {
+      if (key === 'host' || value === undefined) {
+        continue;
+      }
+
+      if (Array.isArray(value)) {
+        for (const item of value) {
+          headers.append(key, item);
+        }
+      } else {
+        headers.set(key, value);
+      }
+    }
+
+    const requestInit = {
+      method: req.method,
+      headers,
+      body: shouldProxyRequestBody(req.method)
+        ? (req as unknown as BodyInit)
+        : undefined,
+      duplex: shouldProxyRequestBody(req.method) ? 'half' : undefined,
+    } as RequestInit & { duplex?: 'half' };
+
+    const upstreamResponse = await fetch(targetUrl, requestInit);
+
+    res.status(upstreamResponse.status);
+
+    upstreamResponse.headers.forEach((value, key) => {
+      res.setHeader(key, value);
+    });
+
+    if (!upstreamResponse.body) {
+      res.end();
+      return;
+    }
+
+    for await (const chunk of upstreamResponse.body) {
+      res.write(chunk);
+    }
+
+    res.end();
+  } catch (error) {
+    console.error(
+      `API proxy request failed for ${req.method} ${req.originalUrl} -> ${targetUrl.toString()}`,
+      error,
+    );
+
+    if (!res.headersSent) {
+      res.status(502).json({
+        error: 'backend_unreachable',
+        message:
+          'No se pudo conectar al backend configurado en BACKEND_URL.',
+      });
+      return;
+    }
+
+    next(error);
+  }
+});
 
 /**
  * Serve static files from /browser
@@ -59,6 +166,13 @@ if (isMainModule(import.meta.url) || process.env['pm_id']) {
     }
 
     console.log(`Node Express server listening on http://localhost:${port}`);
+    console.log(`Angular SSR allowed hosts: ${allowedHosts.join(', ')}`);
+
+    if (!process.env['BACKEND_URL']) {
+      console.warn(
+        'BACKEND_URL is not set. API proxy requests will use http://localhost:8080.',
+      );
+    }
   });
 }
 
