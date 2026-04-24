@@ -18,6 +18,10 @@ export default {
     "route": "/tienda"
   },
   {
+    "renderMode": 0,
+    "route": "/producto/*"
+  },
+  {
     "renderMode": 2,
     "route": "/reparacion-celulares"
   },
@@ -52,19 +56,19 @@ export default {
 ],
   entryPointToBrowserMapping: undefined,
   assets: {
-    'index.csr.html': {size: 2423, hash: 'b4e73cb87e39a26acbaba8f786ddedea73859ef9bee0bde08abaef4d9d5243e1', text: () => import('./assets-chunks/index_csr_html.mjs').then(m => m.default)},
-    'index.server.html': {size: 950, hash: 'dca2b3fe51a5fd0db2db25a619f4d17a94476b3dbf54d443e949a9e4178f8fe9', text: () => import('./assets-chunks/index_server_html.mjs').then(m => m.default)},
-    'accesorios/index.html': {size: 36616, hash: '2e697584bffaa1d02561c23e12446ea9376020a0265f1f1b96a585314eead202', text: () => import('./assets-chunks/accesorios_index_html.mjs').then(m => m.default)},
-    'empresas/index.html': {size: 39081, hash: '1fadd492680b47029f26a275c0277b531a9cdb18b24433dda37fa25ee0084fd3', text: () => import('./assets-chunks/empresas_index_html.mjs').then(m => m.default)},
-    'blog/index.html': {size: 34921, hash: '521495b56c7a54f83129ae7bc57dc39af59e84218b370c4988f3d50dcc0ede1b', text: () => import('./assets-chunks/blog_index_html.mjs').then(m => m.default)},
-    'index.html': {size: 81494, hash: '997e86a23a6c94d2185dc75eab4f6357b033a814d8778b4bcf50131566a2ad62', text: () => import('./assets-chunks/index_html.mjs').then(m => m.default)},
-    'reparacion-celulares/index.html': {size: 39414, hash: 'ab7ce775c45678ac65d02d58789dd34ed5d000fc642b93dead60b00dc7e59e98', text: () => import('./assets-chunks/reparacion-celulares_index_html.mjs').then(m => m.default)},
-    'servicios/index.html': {size: 39860, hash: '530c53d1c02e6aec789434d16aaebae3474fbe6f08c30b984916489893a8237d', text: () => import('./assets-chunks/servicios_index_html.mjs').then(m => m.default)},
-    'locales/index.html': {size: 47420, hash: '72a89a5ee42380206b7e01390e87ef0748233bc8fdad3205e7d00ccea78a95f6', text: () => import('./assets-chunks/locales_index_html.mjs').then(m => m.default)},
-    'reparacion-laptops/index.html': {size: 38043, hash: 'e4b58677dc7d87805b7cbae281a7bf0e048a499ad46bd8933011a22b40c5e0dd', text: () => import('./assets-chunks/reparacion-laptops_index_html.mjs').then(m => m.default)},
-    'tienda/index.html': {size: 27022, hash: '6dfb96c732d21806dac117030cc61be7414d29e045e4b4f41f7e68d6aa7965b3', text: () => import('./assets-chunks/tienda_index_html.mjs').then(m => m.default)},
-    'contacto/index.html': {size: 35818, hash: '06bd95c9c1a7d6bc7b6d82d3a56cef6377e8a41f445d1bd351b07ead4f4f2d53', text: () => import('./assets-chunks/contacto_index_html.mjs').then(m => m.default)},
-    'nosotros/index.html': {size: 38071, hash: 'ef520e4b42e44ee162245a4fc2302f71062f21c73429939d4d0bba2edfad89c5', text: () => import('./assets-chunks/nosotros_index_html.mjs').then(m => m.default)},
+    'index.csr.html': {size: 2423, hash: '0aa7ca5d41679d73a579a5f56ebf054c91da78ae2e3741271ffb09f8315e47bc', text: () => import('./assets-chunks/index_csr_html.mjs').then(m => m.default)},
+    'index.server.html': {size: 950, hash: '7e8dec1b38f9c80b10a831dd0408135ce70da031decd2ec53931cea20d6ceb3b', text: () => import('./assets-chunks/index_server_html.mjs').then(m => m.default)},
+    'empresas/index.html': {size: 39081, hash: '7c7c1a32dcc2854f67c43e132bf5132ec7dfdd4f3ce47c87fbf5c5efe40435fd', text: () => import('./assets-chunks/empresas_index_html.mjs').then(m => m.default)},
+    'servicios/index.html': {size: 39860, hash: '2664cc0a9f8d2fb2b56a01988b6d3a903cc1cde41e3231984952189b60e798bf', text: () => import('./assets-chunks/servicios_index_html.mjs').then(m => m.default)},
+    'accesorios/index.html': {size: 36616, hash: 'd447f4d9d2b277781b00451b3ac16f112d37cfe385b060103e5e4d268e124d1a', text: () => import('./assets-chunks/accesorios_index_html.mjs').then(m => m.default)},
+    'blog/index.html': {size: 34921, hash: '1a3cac118be8ce69a7080f7537d4c85da954bd397a26f7dfc0266a2a386d2caf', text: () => import('./assets-chunks/blog_index_html.mjs').then(m => m.default)},
+    'index.html': {size: 81494, hash: 'b434ef9194bfe6179ba6ee4dacf96f376b5e8b2b5878e9be85f48ce5dc83c9f8', text: () => import('./assets-chunks/index_html.mjs').then(m => m.default)},
+    'contacto/index.html': {size: 35818, hash: '84f2111b726a060c21f8273eab0c6d89bdf6a617df371e1f0b9898a703e764d7', text: () => import('./assets-chunks/contacto_index_html.mjs').then(m => m.default)},
+    'reparacion-celulares/index.html': {size: 39414, hash: 'c7a78757b589d07d1f297a69dd90195f4c4f675059bd1a9bd79980b2452efdae', text: () => import('./assets-chunks/reparacion-celulares_index_html.mjs').then(m => m.default)},
+    'locales/index.html': {size: 47420, hash: '7eb0f9a9051c01003cea89bdaa12a444dcb838ea44e5fb16205dd3e0dd24557b', text: () => import('./assets-chunks/locales_index_html.mjs').then(m => m.default)},
+    'nosotros/index.html': {size: 38071, hash: '5646dae9ffe16e80bdd29e045e212b36614db6dd434882f87ed8cffa80c1aa2a', text: () => import('./assets-chunks/nosotros_index_html.mjs').then(m => m.default)},
+    'reparacion-laptops/index.html': {size: 38043, hash: 'd331e2c1efc094c6f22e59e2aba96e1cefb2302414d8bd5e116329a32e7fe36a', text: () => import('./assets-chunks/reparacion-laptops_index_html.mjs').then(m => m.default)},
+    'tienda/index.html': {size: 34050, hash: '9e29e53af3bcac53d7627577927efa6f7fb5e7afbadcd3cfb31d6279b5c4dfc6', text: () => import('./assets-chunks/tienda_index_html.mjs').then(m => m.default)},
     'styles-OKLENS4X.css': {size: 13090, hash: 'pRNvoNv0R0s', text: () => import('./assets-chunks/styles-OKLENS4X_css.mjs').then(m => m.default)}
   },
 };

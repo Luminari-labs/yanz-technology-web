@@ -11,6 +11,7 @@ import { Nosotros } from '../pages/nosotros/nosotros';
 import { Contacto } from '../pages/contacto/contacto';
 import { Blog } from '../pages/blog/blog';
 import { Tienda } from '../pages/tienda/tienda';
+import { ProductoDetalle } from '../pages/producto-detalle/producto-detalle';
 
 export const routes: Routes = [
     {
@@ -20,6 +21,7 @@ export const routes: Routes = [
             { path: '', component: Home },
             { path: 'servicios', component: Servicios },
             { path: 'tienda', component: Tienda },
+            { path: 'producto/:id', component: ProductoDetalle },
             { path: 'reparacion-celulares', component: ReparacionCelulares },
             { path: 'reparacion-laptops', component: ReparacionLaptops },
             { path: 'empresas', component: Empresas },
