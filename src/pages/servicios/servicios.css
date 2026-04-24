@@ -1,0 +1,7 @@
+.center {
+    text-align: center;
+}
+.center .lead {
+    margin: 30px auto 10px;
+    max-width: 700px;
+}
