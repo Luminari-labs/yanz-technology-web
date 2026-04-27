@@ -111,7 +111,7 @@ export class Tienda implements OnInit {
     // Send to WhatsApp
     // PhoneNumber should probably come from configuration, using a placeholder for now
     const phoneNumber = "593999999999"; // Replace with actual seller number
-    const message = `Hola! Me interesa comprar el producto: *${product.name}* que está publicado en la tienda por $${product.price}.`;
+    const message = `Hola! Me interesa comprar el producto: *${product.name}* que está publicado en la tienda por $${this.formatPrice(product.price)}.`;
     const encodedMessage = encodeURIComponent(message);
     const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
     
@@ -121,5 +121,18 @@ export class Tienda implements OnInit {
   addToCart(product: any, event: Event) {
     event.stopPropagation();
     alert(`El producto ${product.name} se agregó al carrito (Funcionalidad en desarrollo).`);
+  }
+
+  formatPrice(value: number | string | null | undefined): string {
+    if (value === null || value === undefined || value === '') {
+      return '0.00';
+    }
+
+    const numericValue = Number(value);
+    if (!Number.isFinite(numericValue)) {
+      return '0.00';
+    }
+
+    return numericValue.toFixed(2);
   }
 }

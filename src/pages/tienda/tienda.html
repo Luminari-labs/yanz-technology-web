@@ -106,7 +106,7 @@
               <div class="product-info">
                 <h4 class="product-name" title="{{ product.name }}">{{ product.name || 'Producto sin nombre' }}</h4>
                 <div class="product-price-stock">
-                  <span class="product-price">${{ product.price !== null ? product.price : '0.00' }}</span>
+                  <span class="product-price">${{ formatPrice(product.price) }}</span>
                   <span class="product-stock" [class.low-stock]="product.stock < 5">
                     {{ product.stock }} disp.
                   </span>
