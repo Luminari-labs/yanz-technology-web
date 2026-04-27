@@ -1,9 +1,9 @@
-import { Component, PLATFORM_ID, inject, signal, OnInit, computed } from '@angular/core';
-import { isPlatformBrowser } from '@angular/common';
+import { Component, inject, signal, OnInit, computed } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { API_BASE_URL, API_IMAGES_URL } from '../../app/api-base';
+import { formatPriceValue, parsePriceValue } from '../../app/utils/price';
 
 @Component({
   selector: 'app-tienda',
@@ -13,7 +13,6 @@ import { API_BASE_URL, API_IMAGES_URL } from '../../app/api-base';
   styleUrls: ['./tienda.css']
 })
 export class Tienda implements OnInit {
-  private readonly platformId = inject(PLATFORM_ID);
   private readonly productsUrl = `${API_BASE_URL}/products/all`;
   private router = inject(Router);
   private route = inject(ActivatedRoute);
@@ -71,11 +70,11 @@ export class Tienda implements OnInit {
     }
 
     if (minP !== null && minP > 0) {
-      list = list.filter(p => this.toNumber(p.price) >= minP);
+      list = list.filter(p => parsePriceValue(p.price) >= minP);
     }
 
     if (maxP !== null && maxP > 0) {
-      list = list.filter(p => this.toNumber(p.price) <= maxP);
+      list = list.filter(p => parsePriceValue(p.price) <= maxP);
     }
 
     return list;
@@ -142,16 +141,7 @@ export class Tienda implements OnInit {
   }
 
   formatPrice(value: number | string | null | undefined): string {
-    if (value === null || value === undefined || value === '') {
-      return '0.00';
-    }
-
-    const numericValue = Number(value);
-    if (!Number.isFinite(numericValue)) {
-      return '0.00';
-    }
-
-    return numericValue.toFixed(2);
+    return formatPriceValue(value);
   }
 
   private readCategory(product: any): string {
@@ -168,8 +158,4 @@ export class Tienda implements OnInit {
     return value.trim().toLowerCase();
   }
 
-  private toNumber(value: unknown): number {
-    const numeric = Number(value);
-    return Number.isFinite(numeric) ? numeric : 0;
-  }
 }

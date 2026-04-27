@@ -1,8 +1,9 @@
-import { Component, PLATFORM_ID, inject, signal, OnInit } from '@angular/core';
-import { isPlatformBrowser, Location } from '@angular/common';
+import { Component, inject, signal, OnInit } from '@angular/core';
+import { Location } from '@angular/common';
 import { Router, ActivatedRoute, RouterLink } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { API_BASE_URL, API_IMAGES_URL } from '../../app/api-base';
+import { formatPriceValue } from '../../app/utils/price';
 
 @Component({
   selector: 'app-producto-detalle',
@@ -12,7 +13,6 @@ import { API_BASE_URL, API_IMAGES_URL } from '../../app/api-base';
   styleUrls: ['./producto-detalle.css']
 })
 export class ProductoDetalle implements OnInit {
-  private readonly platformId = inject(PLATFORM_ID);
   private router = inject(Router);
   private route = inject(ActivatedRoute);
   private location = inject(Location);
@@ -88,15 +88,6 @@ export class ProductoDetalle implements OnInit {
   }
 
   formatPrice(value: number | string | null | undefined): string {
-    if (value === null || value === undefined || value === '') {
-      return '0.00';
-    }
-
-    const numericValue = Number(value);
-    if (!Number.isFinite(numericValue)) {
-      return '0.00';
-    }
-
-    return numericValue.toFixed(2);
+    return formatPriceValue(value);
   }
 }
