@@ -21,6 +21,7 @@ export const routes: Routes = [
             { path: '', component: Home },
             { path: 'servicios', component: Servicios },
             { path: 'tienda', component: Tienda },
+            { path: 'tienda/:category', component: Tienda },
             { path: 'producto/:id', component: ProductoDetalle },
             { path: 'reparacion-celulares', component: ReparacionCelulares },
             { path: 'reparacion-laptops', component: ReparacionLaptops },

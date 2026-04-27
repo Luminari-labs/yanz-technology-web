@@ -28,7 +28,7 @@
           Categorías
         </h3>
         <ul class="category-list">
-          @for (cat of categories; track cat.id) {
+          @for (cat of categories(); track cat.id) {
             <li>
               <button 
                 class="category-btn" 

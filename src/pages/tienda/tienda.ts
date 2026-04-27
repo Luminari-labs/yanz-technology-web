@@ -1,6 +1,6 @@
 import { Component, PLATFORM_ID, inject, signal, OnInit, computed } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
-import { Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { API_BASE_URL, API_IMAGES_URL } from '../../app/api-base';
@@ -16,6 +16,7 @@ export class Tienda implements OnInit {
   private readonly platformId = inject(PLATFORM_ID);
   private readonly productsUrl = `${API_BASE_URL}/products/all`;
   private router = inject(Router);
+  private route = inject(ActivatedRoute);
   private http = inject(HttpClient);
 
   // Constants
@@ -31,14 +32,27 @@ export class Tienda implements OnInit {
   minPrice = signal<number | null>(null);
   maxPrice = signal<number | null>(null);
 
-  // Available categories (can be dynamic or static)
-  categories = [
-    { id: 'todas', name: 'Todas las categorías' },
-    { id: 'celulares', name: 'Celulares y Tablets' },
-    { id: 'computadoras', name: 'Computadoras y Laptops' },
-    { id: 'accesorios', name: 'Accesorios y Audio' },
-    { id: 'repuestos', name: 'Repuestos Generales' }
-  ];
+  // Available categories generated from DB data
+  categories = computed(() => {
+    const mapped = new Map<string, string>();
+
+    for (const product of this.productsList()) {
+      const rawCategory = this.readCategory(product);
+      const normalizedCategory = this.normalizeCategory(rawCategory);
+      if (!normalizedCategory) {
+        continue;
+      }
+      if (!mapped.has(normalizedCategory)) {
+        mapped.set(normalizedCategory, rawCategory.trim());
+      }
+    }
+
+    const dynamicCategories = [...mapped.entries()]
+      .sort((a, b) => a[1].localeCompare(b[1], 'es', { sensitivity: 'base' }))
+      .map(([id, name]) => ({ id, name }));
+
+    return [{ id: 'todas', name: 'Todas las categorías' }, ...dynamicCategories];
+  });
 
   // Computed signal for filtered products
   filteredProducts = computed(() => {
@@ -53,21 +67,25 @@ export class Tienda implements OnInit {
     }
 
     if (cat !== 'todas') {
-      list = list.filter(p => p.category === cat);
+      list = list.filter(p => this.normalizeCategory(this.readCategory(p)) === cat);
     }
 
     if (minP !== null && minP > 0) {
-      list = list.filter(p => p.price >= minP);
+      list = list.filter(p => this.toNumber(p.price) >= minP);
     }
 
     if (maxP !== null && maxP > 0) {
-      list = list.filter(p => p.price <= maxP);
+      list = list.filter(p => this.toNumber(p.price) <= maxP);
     }
 
     return list;
   });
 
   ngOnInit() {
+    const initialCategoryParam = this.route.snapshot.paramMap.get('category');
+    if (initialCategoryParam) {
+      this.selectedCategory.set(this.normalizeCategory(initialCategoryParam));
+    }
     this.fetchProducts();
   }
 
@@ -134,5 +152,24 @@ export class Tienda implements OnInit {
     }
 
     return numericValue.toFixed(2);
+  }
+
+  private readCategory(product: any): string {
+    if (!product?.category || typeof product.category !== 'string') {
+      return 'Varios';
+    }
+    return product.category;
+  }
+
+  private normalizeCategory(value: string | null | undefined): string {
+    if (!value) {
+      return '';
+    }
+    return value.trim().toLowerCase();
+  }
+
+  private toNumber(value: unknown): number {
+    const numeric = Number(value);
+    return Number.isFinite(numeric) ? numeric : 0;
   }
 }
