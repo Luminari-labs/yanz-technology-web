@@ -1,4 +1,4 @@
-const DEFAULT_PRICE_FALLBACK = '0';
+const DEFAULT_PRICE_FALLBACK = '0.00';
 
 function sanitizePriceInput(value: unknown): string {
   if (value === null || value === undefined) {
@@ -29,7 +29,7 @@ export function formatPriceValue(value: unknown): string {
   }
 
   return new Intl.NumberFormat('es-EC', {
-    minimumFractionDigits: 0,
+    minimumFractionDigits: 2,
     maximumFractionDigits: 2,
   }).format(numericValue);
 }
