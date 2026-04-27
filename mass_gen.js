@@ -47,12 +47,12 @@ export class ${p.className} {}
           <div style="background: var(--black-c); border: 1px solid var(--blue-border); border-radius: 16px; padding: 30px; margin-bottom: 20px;">
               <h3 style="color: var(--blue); margin-bottom: 5px;">Sede Principal</h3>
               <p style="color: var(--ivory-2); font-size: 14px; margin-bottom: 10px;">Calle Gran Colombia y Tarqui, Centro Histórico</p>
-              <a href="https://wa.me/593984097455" class="btn btn-sm btn-ghost">Contactar Local</a>
+              <a href="https://wa.me/593982525224" class="btn btn-sm btn-ghost">Contactar Local</a>
           </div>
           <div style="background: var(--black-c); border: 1px solid var(--blue-border); border-radius: 16px; padding: 30px;">
               <h3 style="color: var(--blue); margin-bottom: 5px;">Sucursal Norte</h3>
               <p style="color: var(--ivory-2); font-size: 14px; margin-bottom: 10px;">Av. Remigio Crespo, sector El Batán</p>
-              <a href="https://wa.me/593984097455" class="btn btn-sm btn-ghost">Contactar Local</a>
+              <a href="https://wa.me/593982525224" class="btn btn-sm btn-ghost">Contactar Local</a>
           </div>
       </div>`;
   }
@@ -62,7 +62,7 @@ export class ${p.className} {}
         <h1 class="rv">${p.title}</h1>
         <p class="lead rv d1" style="max-width: 600px; margin: 20px auto;">${p.desc}</p>
         <div class="cta-acts rv d2" style="margin-top: 40px; justify-content: center;">
-            <a href="https://wa.me/593984097455?text=Hola+Yanz" class="btn btn-primary" target="_blank" rel="noopener">Escríbenos por WhatsApp</a>
+            <a href="https://wa.me/593982525224?text=Hola+Yanz" class="btn btn-primary" target="_blank" rel="noopener">Escríbenos por WhatsApp</a>
         </div>
         ${gridHTML}
     </div>
@@ -74,7 +74,7 @@ export class ${p.className} {}
         <h2 class="cta-h2 rv">Diagnóstico en menos de 15 minutos <em>Sin costo.</em></h2>
         <p class="lead cta-p rv d1">Te decimos qué tiene tu equipo antes de cobrarte un centavo. Sin compromiso para que decidas libremente.</p>
         <div class="cta-acts rv d2" style="justify-content: center;">
-            <a href="https://wa.me/593984097455" target="_blank" rel="noopener" class="btn btn-primary">Hablar con un técnico</a>
+            <a href="https://wa.me/593982525224" target="_blank" rel="noopener" class="btn btn-primary">Hablar con un técnico</a>
         </div>
     </div>
 </section>
