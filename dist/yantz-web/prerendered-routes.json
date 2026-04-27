@@ -1,0 +1,15 @@
+{
+  "routes": {
+    "/": {},
+    "/accesorios": {},
+    "/blog": {},
+    "/contacto": {},
+    "/empresas": {},
+    "/locales": {},
+    "/nosotros": {},
+    "/reparacion-celulares": {},
+    "/reparacion-laptops": {},
+    "/servicios": {},
+    "/tienda": {}
+  }
+}

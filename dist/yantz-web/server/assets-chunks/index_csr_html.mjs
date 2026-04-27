@@ -1,0 +1,16 @@
+export default `<!doctype html>
+<html lang="en" data-beasties-container="">
+
+<head>
+  <meta charset="utf-8">
+  <title>YantzWeb</title>
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="logo-text.png">
+<style>@layer properties;@layer theme,base,components,utilities;@layer theme{:root{--font-sans:ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";--font-mono:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;--spacing:.25rem;--default-font-family:var(--font-sans);--default-mono-font-family:var(--font-mono)}}@layer base{*,:after,:before{box-sizing:border-box;margin:0;padding:0;border:0 solid}html{line-height:1.5;-webkit-text-size-adjust:100%;tab-size:4;font-family:var(--default-font-family, ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji");font-feature-settings:var(--default-font-feature-settings, normal);font-variation-settings:var(--default-font-variation-settings, normal);-webkit-tap-highlight-color:transparent}}@layer utilities{}:root{--blue:#008DDE;--blue-deep:#005EA0;--blue-dim:rgba(0, 141, 222, .1);--blue-border:rgba(0, 141, 222, .15);--blue-border-h:rgba(0, 141, 222, .4);--black:#070810;--black-b:#0A0F1E;--black-c:#0d1628;--ivory:#F5F5F3;--ivory-2:#a0b0c0;--ivory-3:#3d4f62;--gold:#C9943A;--gold-h:#daa84a;--teal:#1B9E8E;--green:#25D366;--ease:cubic-bezier(.22, 1, .36, 1);--font:"Plus Jakarta Sans", sans-serif;--text-muted:#a0b0c0;--text-dim:#3d4f62;--sand:#C9943A;--font-display:"Plus Jakarta Sans", sans-serif}*{margin:0;padding:0;box-sizing:border-box}body{background:var(--black);color:var(--ivory);font-family:var(--font);-webkit-font-smoothing:antialiased;overflow-x:hidden;line-height:1.7}@property --tw-border-style{syntax:"*";inherits:false;initial-value:solid;}@layer properties{@supports ((-webkit-hyphens: none) and (not (margin-trim: inline))) or ((-moz-orient: inline) and (not (color:rgb(from red r g b)))){*,:before,:after{--tw-border-style:solid}}}</style><link rel="stylesheet" href="styles-PDADAJD5.css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="styles-PDADAJD5.css"></noscript></head>
+
+<body ngcm="">
+  <app-root></app-root>
+<script src="main-JBVFN22M.js" type="module"></script></body>
+
+</html>`;
