@@ -10,7 +10,8 @@ const runtimeBackendUrl =
   typeof window !== 'undefined'
     ? window.__APP_CONFIG__?.BACKEND_URL?.trim()
     : undefined;
-const defaultBackendUrl = 'http://yanzacademy-backendbuyfast-avgzzn:8080';
+// Use same-origin `/api` as default so it works behind reverse proxies (nginx/SSR).
+const defaultBackendUrl = '/api';
 
 const normalizeBaseUrl = (value: string) => {
   const withoutTrailingSlash = value.replace(/\/+$/, '');
