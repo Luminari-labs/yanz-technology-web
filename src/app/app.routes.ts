@@ -10,6 +10,7 @@ import { Locales } from '../pages/locales/locales';
 import { Nosotros } from '../pages/nosotros/nosotros';
 import { Contacto } from '../pages/contacto/contacto';
 import { Blog } from '../pages/blog/blog';
+import { Privacidad } from '../pages/privacidad/privacidad';
 import { Tienda } from '../pages/tienda/tienda';
 import { ProductoDetalle } from '../pages/producto-detalle/producto-detalle';
 
@@ -30,6 +31,7 @@ export const routes: Routes = [
             { path: 'locales', component: Locales },
             { path: 'nosotros', component: Nosotros },
             { path: 'contacto', component: Contacto },
+            { path: 'privacidad', component: Privacidad },
             { path: 'blog', component: Blog }
         ]
     },
