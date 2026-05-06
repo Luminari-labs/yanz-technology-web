@@ -13,6 +13,7 @@ import { Blog } from '../pages/blog/blog';
 import { Privacidad } from '../pages/privacidad/privacidad';
 import { Tienda } from '../pages/tienda/tienda';
 import { ProductoDetalle } from '../pages/producto-detalle/producto-detalle';
+import { Torneo } from '../pages/torneo/torneo';
 
 export const routes: Routes = [
     {
@@ -32,7 +33,8 @@ export const routes: Routes = [
             { path: 'nosotros', component: Nosotros },
             { path: 'contacto', component: Contacto },
             { path: 'privacidad', component: Privacidad },
-            { path: 'blog', component: Blog }
+            { path: 'blog', component: Blog },
+            { path: 'torneo', component: Torneo }
         ]
     },
 
